@@ -501,6 +501,24 @@
   }
 })();
 </script>
-
+<script>
+/* 2차 신청 결정론 귀속 — leadgenId prefill (Phase 5, water-2608) */
+(function () {
+  try {
+    var lg = new URLSearchParams(location.search).get('lg');
+    if (!lg) return;
+    lg = String(lg).replace(/\D/g, '');
+    if (!lg) return;
+    var code = encodeURIComponent('water-2608__' + lg);
+    var re = /(entry\.1144587058=)[^&"']*/;
+    document.querySelectorAll('iframe[src*="entry.1144587058"]').forEach(function (f) {
+      f.src = f.src.replace(re, '$1' + code);
+    });
+    document.querySelectorAll('a[href*="entry.1144587058"]').forEach(function (a) {
+      a.href = a.href.replace(re, '$1' + code);
+    });
+  } catch (e) {}
+})();
+</script>
 </body>
 </html>
