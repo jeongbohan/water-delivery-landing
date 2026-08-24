@@ -520,5 +520,26 @@
   } catch (e) {}
 })();
 </script>
+<script>
+/* 김이화3 2차 완전격리 분기 — water-k3-2608 (2026-08-24, AD-20260824-001)
+   marker면 신규 폼 스왑 + 코드 water-k3-2608[__<lg>]. marker 없으면 기존 Phase5 그대로. */
+(function () {
+  try {
+    var p = new URLSearchParams(location.search);
+    if (p.get('utm_campaign') !== 'coupangwater_newacct_2608') return;
+    var lg = String(p.get('lg') || '').replace(/\D/g, '');
+    var code = encodeURIComponent(lg ? 'water-k3-2608__' + lg : 'water-k3-2608');
+    var NEW_EID   = '1FAIpQLSdIsBuKPPsXj1-SQgc18BugTCniRXLIkMT9RycfL0R9TWL4kQ';
+    var NEW_ENTRY = '1144587058';
+    var base = 'https://docs.google.com/forms/d/e/' + NEW_EID + '/viewform';
+    document.querySelectorAll('#apply iframe').forEach(function (f) {
+      f.src = base + '?embedded=true&entry.' + NEW_ENTRY + '=' + code;
+    });
+    document.querySelectorAll('#apply a.sch-cta').forEach(function (a) {
+      a.href = base + '?usp=pp_url&entry.' + NEW_ENTRY + '=' + code;
+    });
+  } catch (e) {}
+})();
+</script>
 </body>
 </html>
