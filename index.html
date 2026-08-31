@@ -681,5 +681,32 @@
   } catch (e) {}
 })();
 </script>
+<script>
+/* 재활성 2차 전용격리 분기 — react_2609 (2026-08-31, DB-REACTIVATION-20260831-001)
+   marker(utm_campaign=react_2609)면 재활성 전용 폼으로 통째 스왑 + 코드=react-s{n}-2609[__<send_id>].
+   marker 없으면 손대지 않음 → Phase5/K3 그대로. ※ K3 블록 '다음'에 둔다(있을 때 src를 나중에 덮어써 이겨야 함). */
+(function () {
+  try {
+    var p = new URLSearchParams(location.search);
+    if (p.get('utm_campaign') !== 'react_2609') return;
+    var rs = String(p.get('rs') || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+    if (!/^s[123]$/.test(rs)) rs = 's3';
+    var rid = String(p.get('rid') || '').replace(/[^A-Za-z0-9_-]/g, '');
+    var raw  = 'react-' + rs + '-2609' + (rid ? '__' + rid : '');
+    var code = encodeURIComponent(raw);
+
+    var NEW_EID   = '1FAIpQLSc7NTtXMY_NEu2_26zOGOI3N7YlfAGAsM5xKOjm_09TuvT7kQ';
+    var NEW_ENTRY = '1144587058';
+
+    var base = 'https://docs.google.com/forms/d/e/' + NEW_EID + '/viewform';
+    document.querySelectorAll('#apply iframe').forEach(function (f) {
+      f.src = base + '?embedded=true&entry.' + NEW_ENTRY + '=' + code;
+    });
+    document.querySelectorAll('#apply a.sch-cta').forEach(function (a) {
+      a.href = base + '?usp=pp_url&entry.' + NEW_ENTRY + '=' + code;
+    });
+  } catch (e) { /* 무해 실패 — 기존 폼 유지 */ }
+})();
+</script>
 </body>
 </html>
