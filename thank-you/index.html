@@ -14,10 +14,11 @@
   <main class="card">
     <img class="logo" src="../img/deliveryin-logo.png" alt="배송인그룹">
     <div class="check" aria-hidden="true">✓</div>
-    <h1>지원 접수가 완료됐어요</h1>
+    <h1 id="completeTitle">지원 접수가 완료됐어요</h1>
     <p>입력해주신 내용을 확인한 뒤<br>담당자가 순차적으로 연락드릴게요.</p>
     <div class="note">업무 적합성 진단을 위한 유선상 인터뷰가 진행됩니다.</div>
     <a class="back" href="../direct/">지원 페이지로 돌아가기</a>
   </main>
+  <script>const kind=new URLSearchParams(location.search).get('kind');if(kind==='reconsent')document.querySelector('#completeTitle').textContent='수신 동의가 반영됐어요';else if(kind==='duplicate')document.querySelector('#completeTitle').textContent='이미 접수된 지원이에요';</script>
 </body>
 </html>
