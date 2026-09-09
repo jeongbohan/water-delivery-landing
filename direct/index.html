@@ -21,10 +21,12 @@
     @media(max-width:520px){html{background:#fff}.page{box-shadow:none}.hero{min-height:264px;background-position:52% 43%}.hero-inner{min-height:264px;padding:15px 20px 21px}.brand{padding:7px 10px 7px 8px}.brand img{width:134px}.hero h1{font-size:25px;letter-spacing:-1.15px}.hero p{font-size:12.5px}.hero-label{font-size:12px;margin-bottom:8px}.form-area{padding:27px 20px calc(34px + env(safe-area-inset-bottom))}.form-head h2{font-size:22px}.form-head p{font-size:13px;margin-bottom:21px}.row{gap:8px}.control{height:52px;padding:0 13px;font-size:15px}.address-row{grid-template-columns:minmax(0,1fr) 91px}.address-display,.change-address{height:52px}.address-display{padding:0 12px 0 42px;font-size:14px}.address-display svg{left:12px}.search-wrap .search{padding-left:44px}.change-address{font-size:14px}.field{margin-bottom:17px}.choice span{font-size:14px}.submit{height:58px}.sheet{height:min(86dvh,calc(var(--address-vvh) - 8px));max-height:calc(var(--address-vvh) - 8px)}}
     @media(max-width:370px){.row{grid-template-columns:1fr}.hero h1{font-size:23px}.address-row{grid-template-columns:minmax(0,1fr) 84px}}
     @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+    .lp-content-frame{display:none;width:100%;height:0;border:0;background:#fff}.page.is-lp2 .lp-content-frame{display:block}.page.is-lp2>.hero{display:none}.page.is-lp2 .form-area{border-top:1px solid #e4e7ec}.page.is-lp2 .form-head{text-align:center}
   </style>
 </head>
 <body data-submit-endpoint="https://script.google.com/macros/s/AKfycbyz430wy6_qFTjGvMN5jHx8ZsNHyT9R6-obOACC0LIDnqz9bBqOm1I87La9119gM2Qq/exec">
   <div class="page">
+    <iframe class="lp-content-frame" id="lpContentFrame" title="쿠팡 생수배송 상세 안내" scrolling="no"></iframe>
     <header class="hero">
       <div class="hero-inner">
         <div class="brand"><img src="../img/deliveryin-logo.png" alt="배송인그룹"></div>
@@ -35,7 +37,7 @@
         </div>
       </div>
     </header>
-    <main class="form-area">
+    <main class="form-area" id="apply">
       <div class="form-head"><h2>이력서 없이 바로 지원하세요</h2><p>기본 정보만 남겨주시면 담당자가 현재 모집 조건을 안내드려요.</p></div>
       <form id="leadForm" novalidate>
         <div class="row">
@@ -82,7 +84,8 @@
     </section>
   </div>
   <script>
-    const form=document.querySelector('#leadForm'),button=document.querySelector('#submitButton'),notice=document.querySelector('#notice'),endpoint=document.body.dataset.submitEndpoint.trim(),phone=document.querySelector('#phone'),age=document.querySelector('#age'),region=document.querySelector('#region'),addressDisplay=document.querySelector('#addressDisplay'),addressLayer=document.querySelector('#addressLayer'),addressSearch=document.querySelector('#addressSearch'),addressResults=document.querySelector('#addressResults'),searchTip=document.querySelector('#searchTip'),qs=new URLSearchParams(location.search),content=qs.get('utm_content')||'603';
+    const form=document.querySelector('#leadForm'),button=document.querySelector('#submitButton'),notice=document.querySelector('#notice'),endpoint=document.body.dataset.submitEndpoint.trim(),phone=document.querySelector('#phone'),age=document.querySelector('#age'),region=document.querySelector('#region'),addressDisplay=document.querySelector('#addressDisplay'),addressLayer=document.querySelector('#addressLayer'),addressSearch=document.querySelector('#addressSearch'),addressResults=document.querySelector('#addressResults'),searchTip=document.querySelector('#searchTip'),qs=new URLSearchParams(location.search),content=qs.get('utm_content')||'603',lpContentFrame=document.querySelector('#lpContentFrame'),lpMap={603:'602',604:'601'},lpSource=lpMap[content];
+    if(lpSource){const lpParams=new URLSearchParams(qs);lpParams.set('content_only','1');lpParams.set('lp_variant',content);document.querySelector('.page').classList.add('is-lp2');lpContentFrame.src=`../${lpSource}/?${lpParams.toString()}`;window.addEventListener('message',event=>{const data=event.data||{};if(event.origin!==location.origin||data.source!=='deliveryin-lp-content')return;if(data.height){lpContentFrame.style.height=`${Math.max(600,Number(data.height))}px`}if(data.action==='apply'){document.querySelector('#apply').scrollIntoView({behavior:'smooth',block:'start'})}})}
     const tracking={content_id:qs.get('content_id')||'AD-20260904-001-603',source_code:qs.get('source_code')||`water-k3-2609-${content}`,utm_source:qs.get('utm_source')||'meta',utm_medium:qs.get('utm_medium')||'paid_social',utm_campaign:qs.get('utm_campaign')||'coupangwater_directform_202609',utm_content:content,campaign_id:qs.get('campaign_id')||'',adset_id:qs.get('adset_id')||'',ad_id:qs.get('ad_id')||''};
     function applyTracking(){Object.entries(tracking).forEach(([key,value])=>{const el=document.querySelector('#'+key.replace(/_([a-z])/g,(_,c)=>c.toUpperCase()));if(el)el.value=value})}
     applyTracking();window.addEventListener('pageshow',applyTracking);
