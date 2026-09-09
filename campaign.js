@@ -11,7 +11,7 @@
     if(eyebrow603)eyebrow603.textContent='쿠팡 생수배송 · 수도권 기사 모집';
     if(title603)title603.innerHTML='수도권에서 알아보는<br><em>쿠팡 생수배송</em>';
     if(lead603)lead603.innerHTML='현재 모집 지역과 시작 조건을 먼저 확인하세요.<br>내 거주지 기준으로 가능한 센터를 안내해드려요.';
-    if(creative)creative.alt='쿠팡 생수배송 수도권 기사 모집 조건 안내';
+    if(creative){creative.src='../img/creative-603.webp';creative.alt='쿠팡 생수배송 수도권 기사 모집 조건 안내'}
   }
   if(contentOnly&&landingVariant==='604'){
     document.title='쿠팡 생수배송 월 평균 매출 750만원대 구조 | 배송인그룹';
@@ -20,7 +20,7 @@
     if(title604)title604.innerHTML='월 평균 매출<br><em>750만원대 구조</em>';
     if(lead604)lead604.innerHTML='비용 차감 전 매출이며 개인별 조건에 따라 달라져요.<br>실제 정산 내역과 수익구조부터 확인하세요.';
     if(stat604)stat604.textContent='월 평균 매출 구조';
-    if(creative)creative.alt='월 평균 매출 750만원대 쿠팡 생수배송 구조 안내';
+    if(creative){creative.src='../img/creative-604.webp';creative.alt='월 평균 매출 750만원대 쿠팡 생수배송 구조 안내'}
   }
   var leadId=String(params.get('lg')||params.get('leadgenId')||'').replace(/\D/g,'');
   var source='water-k3-2608-'+variant+(leadId?'__'+leadId:'');
