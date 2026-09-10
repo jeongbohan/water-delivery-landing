@@ -51,6 +51,14 @@ test('기존 Q1~Q4 단가·무게·적응·수입 이미지를 순서대로 사�
   assert.equal(html.includes('reason-list'), false);
 });
 
+test('Q1 상품명, 차량 임대 안내, 지원 조건 문구를 요청안으로 표시한다', () => {
+  assert.match(html, /<strong>마켓컬리<\/strong>, 단가는 얼마인가요\?/);
+  assert.match(html, /vehicle-rental-hd\.png/);
+  for (const copy of ['스케쥴 문제 없는 성실함','바로 그만두지 않는 끈기','운전면허 소지자(1,2종 무관)','55세 이하의 여성과 남성','체력과 열정이 남다르시다면 혹시 모릅니다']) {
+    assert.equal(html.includes(copy), true, `요청 문구 누락: ${copy}`);
+  }
+});
+
 test('Only 구간은 기존 랜딩 문구를 그대로 사용한다', () => {
   for (const copy of ['오직 컬리','가장 가벼운 택배','여자도 가능한 고수익 배송','50대 기사 만족도 1위']) {
     assert.match(html, new RegExp(copy));
