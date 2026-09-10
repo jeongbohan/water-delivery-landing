@@ -32,6 +32,12 @@ test('컬리 차량 기준과 사례 한계를 명시한다', () => {
   assert.match(html, /평균이나 보장을 뜻하지 않아요/);
 });
 
+test('기존 세로형 상세페이지의 핵심 정보 흐름을 보존한다', () => {
+  for (const marker of ['hero-driver-v2.png','10년차 기사의 선택','컬리에서 일하는 방식','차량이 아직 없어도','마지막 확인','현장 이야기','간단 조건 확인']) {
+    assert.match(html, new RegExp(marker));
+  }
+});
+
 test('GA4 전환 퍼널 이벤트를 포함한다', () => {
   for (const eventName of ['landing_view','landing_click','proof_view','form_start','generate_lead']) {
     assert.match(app, new RegExp(eventName));
