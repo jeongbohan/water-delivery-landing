@@ -33,9 +33,16 @@ test('컬리 차량 기준과 사례 한계를 명시한다', () => {
 });
 
 test('기존 세로형 상세페이지의 핵심 정보 흐름을 보존한다', () => {
-  for (const marker of ['hero-driver-v4.png','여성도 · 50대도 조건 확인','차량 없어도 신청 가능','10년차 기사의 선택','컬리에서 일하는 방식','차량이 아직 없어도','마지막 확인','현장 이야기','간단 조건 확인']) {
+  for (const marker of ['hero-driver-v4.png','여성도 · 50대도 조건 확인','차량 없어도 신청 가능','10년차 기사의 선택','예비 기사님들을 위한','차량이 아직 없어도','마지막 확인','현장 이야기','간단 조건 확인']) {
     assert.match(html, new RegExp(marker));
   }
+});
+
+test('기존 Q1~Q4 단가·무게·적응·수입 이미지를 순서대로 사용한다', () => {
+  for (const image of ['qa-1-unit-price.png','qa-2-weight.png','qa-3-adaptation.png','qa-4-income.png']) {
+    assert.match(html, new RegExp(image));
+  }
+  assert.equal(html.includes('reason-list'), false);
 });
 
 test('Only 구간은 기존 랜딩 문구를 그대로 사용한다', () => {
