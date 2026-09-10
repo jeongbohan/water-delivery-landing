@@ -59,6 +59,14 @@ test('Q1 상품명, 차량 임대 안내, 지원 조건 문구를 요청안으�
   }
 });
 
+test('FAQ 대신 최신 2,588명 신뢰 섹션을 표시한다', () => {
+  assert.match(html, /배송인그룹 소속 배송인/);
+  assert.match(html, /2,588명/);
+  assert.match(html, /근속 유지율 95\.7%/);
+  assert.match(html, /route-manager-count-2588\.webp/);
+  assert.equal(html.includes('class="section faq"'), false);
+});
+
 test('Only 구간은 기존 랜딩 문구를 그대로 사용한다', () => {
   for (const copy of ['오직 컬리','가장 가벼운 택배','여자도 가능한 고수익 배송','50대 기사 만족도 1위']) {
     assert.match(html, new RegExp(copy));
