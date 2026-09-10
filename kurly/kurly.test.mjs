@@ -32,6 +32,12 @@ test('컬리 차량 기준과 사례 한계를 명시한다', () => {
   assert.match(html, /평균이나 보장을 뜻하지 않아요/);
 });
 
+test('지급 자료 바로 아래에 고해상도 소득 안내를 두고 차량 경고 문구를 사용한다', () => {
+  assert.match(html, /<template id="proofTemplate">[\s\S]*pay-statements-may-2026\.jpg[\s\S]*income-1000-profile-hd\.png[\s\S]*<\/template>/);
+  assert.match(html, /차 부터 구매하지 마세요!/);
+  assert.equal(html.includes('차량을 바로 준비해야 하나요?'), false);
+});
+
 test('기존 세로형 상세페이지의 핵심 정보 흐름을 보존한다', () => {
   for (const marker of ['hero-driver-v4.png','여성도 · 50대도 조건 확인','차량 없어도 신청 가능','10년차 기사의 선택','예비 기사님들을 위한','차량이 아직 없어도','마지막 확인','현장 이야기','간단 조건 확인']) {
     assert.match(html, new RegExp(marker));
