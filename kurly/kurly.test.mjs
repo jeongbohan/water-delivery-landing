@@ -107,3 +107,15 @@ test('GA4 전환 퍼널 이벤트를 포함한다', () => {
     assert.match(app, new RegExp(eventName));
   }
 });
+
+test('영상은 유튜브로 이탈하지 않고 페이지 내부 팝업에서 재생한다', () => {
+  assert.equal(html.includes('href="https://www.youtube.com'), false);
+  assert.equal(html.includes('target="_blank"'), false);
+  assert.equal((html.match(/data-video-id=/g) || []).length, 4);
+  assert.match(html, /id="videoModal"[^>]*hidden/);
+  assert.match(html, /role="dialog"[^>]*aria-modal="true"/);
+  assert.match(app, /youtube-nocookie\.com\/embed/);
+  assert.match(app, /playsinline=1/);
+  assert.match(app, /videoFrame\.src = ''/);
+  assert.match(app, /event\.key === 'Escape'/);
+});

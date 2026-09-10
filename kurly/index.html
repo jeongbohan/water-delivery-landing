@@ -6,7 +6,7 @@
   <meta name="robots" content="noindex,nofollow">
   <meta name="theme-color" content="#5f0080">
   <title>컬리 새벽배송 조건 안내 | 배송인그룹</title>
-  <link rel="stylesheet" href="./style.css?v=20260910-2">
+  <link rel="stylesheet" href="./style.css?v=20260910-3">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@700&display=swap" rel="stylesheet">
@@ -35,7 +35,7 @@
     <section class="section feature-video" aria-labelledby="firstStoryTitle">
       <p class="section-kicker">10년차 기사의 선택</p>
       <h2 id="firstStoryTitle">왜 컬리 새벽배송에<br>정착했는지 들어보세요</h2>
-      <a class="video-card featured" href="https://www.youtube.com/watch?v=mCJuszoKHhM" target="_blank" rel="noopener" data-track="video_work"><img src="https://i.ytimg.com/vi/mCJuszoKHhM/maxresdefault.jpg" alt="컬리 배송 현장 인터뷰 썸네일"><span><b>택배와 다른 실제 업무 흐름</b>현장에서 느낀 차이를 직접 설명해요.</span></a>
+      <button class="video-card featured" type="button" data-video-id="mCJuszoKHhM" data-video-title="택배와 다른 실제 업무 흐름" data-track="video_work"><img src="https://i.ytimg.com/vi/mCJuszoKHhM/maxresdefault.jpg" alt="컬리 배송 현장 인터뷰 썸네일"><span><b>택배와 다른 실제 업무 흐름</b>현장에서 느낀 차이를 직접 설명해요.</span></button>
     </section>
 
     <div id="proofSlotEarly"></div>
@@ -81,9 +81,9 @@
       <p class="section-kicker">현장 이야기</p>
       <h2 id="storyTitle">먼저 경험한 기사님의<br>이야기를 더 확인해보세요</h2>
       <div class="video-grid">
-        <a class="video-card" href="https://www.youtube.com/watch?v=Qw9DFl-LsI4" target="_blank" rel="noopener" data-track="video_retirement"><img src="https://i.ytimg.com/vi/Qw9DFl-LsI4/hqdefault.jpg" alt="컬리 배송과 생활시간에 관한 현장 인터뷰 썸네일" loading="lazy"><span><b>일과 생활시간</b>투잡과 이후 계획을 이야기해요.</span></a>
-        <a class="video-card" href="https://www.youtube.com/watch?v=akgezimC_l4" target="_blank" rel="noopener" data-track="video_parenting"><img src="https://i.ytimg.com/vi/akgezimC_l4/hqdefault.jpg" alt="여성 새벽배송 기사 인터뷰 썸네일" loading="lazy"><span><b>육아와 새벽배송</b>경력단절 이후 경험을 들려줘요.</span></a>
-        <a class="video-card" href="https://www.youtube.com/watch?v=CMIbT5JGWew" target="_blank" rel="noopener" data-track="video_finish"><img src="https://i.ytimg.com/vi/CMIbT5JGWew/hqdefault.jpg" alt="새벽배송 종료 시간에 관한 현장 인터뷰 썸네일" loading="lazy"><span><b>종료 시간과 하루</b>실제 근무 흐름을 확인해요.</span></a>
+        <button class="video-card" type="button" data-video-id="Qw9DFl-LsI4" data-video-title="일과 생활시간" data-track="video_retirement"><img src="https://i.ytimg.com/vi/Qw9DFl-LsI4/hqdefault.jpg" alt="컬리 배송과 생활시간에 관한 현장 인터뷰 썸네일" loading="lazy"><span><b>일과 생활시간</b>투잡과 이후 계획을 이야기해요.</span></button>
+        <button class="video-card" type="button" data-video-id="akgezimC_l4" data-video-title="육아와 새벽배송" data-track="video_parenting"><img src="https://i.ytimg.com/vi/akgezimC_l4/hqdefault.jpg" alt="여성 새벽배송 기사 인터뷰 썸네일" loading="lazy"><span><b>육아와 새벽배송</b>경력단절 이후 경험을 들려줘요.</span></button>
+        <button class="video-card" type="button" data-video-id="CMIbT5JGWew" data-video-title="종료 시간과 하루" data-track="video_finish"><img src="https://i.ytimg.com/vi/CMIbT5JGWew/hqdefault.jpg" alt="새벽배송 종료 시간에 관한 현장 인터뷰 썸네일" loading="lazy"><span><b>종료 시간과 하루</b>실제 근무 흐름을 확인해요.</span></button>
       </div>
       <p class="source-note">영상은 출연자의 개별 경험이며 모든 사람에게 같은 결과를 의미하지 않아요.</p>
     </section>
@@ -122,6 +122,15 @@
     <footer><b>주식회사 배송인그룹</b><span>지역·센터·모집 상황에 따라 안내 내용은 달라질 수 있습니다.</span></footer>
   </main>
 
+  <div class="video-modal" id="videoModal" hidden>
+    <div class="video-modal-backdrop" data-video-close></div>
+    <div class="video-modal-panel" role="dialog" aria-modal="true" aria-labelledby="videoModalTitle">
+      <button class="video-modal-close" id="videoModalClose" type="button" aria-label="영상 닫기">×</button>
+      <div class="video-frame"><iframe id="videoFrame" title="배송인그룹 현장 영상" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+      <p class="video-modal-title" id="videoModalTitle"></p>
+    </div>
+  </div>
+
   <template id="proofTemplate">
     <section class="section proof" aria-labelledby="proofTitle">
       <p class="section-kicker">실제 지급 자료</p><h2 id="proofTitle">결과를 단정하지 않고<br>자료로 확인해보세요</h2><p class="proof-intro">아래 자료는 2026년 5월 지급 사례 6건이에요. 개인·물량·단가·비용에 따라 결과가 달라지며 평균이나 보장을 뜻하지 않아요.</p>
@@ -129,6 +138,6 @@
       <div class="income-profile"><img src="./img/income-1000-profile-hd.png" alt="월 1,000만원 기사님들의 공통점 안내" loading="lazy"></div>
     </section>
   </template>
-  <iframe name="submitResultFrame" id="submitResultFrame" title="제출 처리 결과" hidden></iframe><script src="./app.js?v=20260910-2"></script>
+  <iframe name="submitResultFrame" id="submitResultFrame" title="제출 처리 결과" hidden></iframe><script src="./app.js?v=20260910-3"></script>
 </body>
 </html>

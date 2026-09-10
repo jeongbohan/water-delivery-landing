@@ -46,6 +46,36 @@
     }));
   });
 
+  const videoModal = document.querySelector('#videoModal');
+  const videoFrame = document.querySelector('#videoFrame');
+  const videoModalTitle = document.querySelector('#videoModalTitle');
+  const videoModalClose = document.querySelector('#videoModalClose');
+  let lastVideoTrigger = null;
+  const closeVideo = () => {
+    if (videoModal.hidden) return;
+    videoModal.hidden = true;
+    videoFrame.src = '';
+    document.body.classList.remove('video-modal-open');
+    if (lastVideoTrigger) lastVideoTrigger.focus();
+  };
+  document.querySelectorAll('[data-video-id]').forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      lastVideoTrigger = trigger;
+      videoModalTitle.textContent = trigger.dataset.videoTitle;
+      videoFrame.src = `https://www.youtube-nocookie.com/embed/${trigger.dataset.videoId}?autoplay=1&playsinline=1&rel=0`;
+      videoModal.hidden = false;
+      document.body.classList.add('video-modal-open');
+      requestAnimationFrame(() => videoModalClose.focus());
+    });
+  });
+  videoModal.addEventListener('click', event => {
+    if (event.target.hasAttribute('data-video-close')) closeVideo();
+  });
+  videoModalClose.addEventListener('click', closeVideo);
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') closeVideo();
+  });
+
   const proofElement = document.querySelector('.proof');
   let proofSeen = false;
   new IntersectionObserver(entries => {
