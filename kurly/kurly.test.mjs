@@ -44,6 +44,11 @@ test('기존 세로형 상세페이지의 핵심 정보 흐름을 보존한다',
   }
 });
 
+test('히어로와 일러스트 배경의 보라색을 통일한다', () => {
+  assert.match(readFileSync(new URL('./style.css', import.meta.url), 'utf8'), /\.hero\{[^}]*background:#71249a/);
+  assert.match(readFileSync(new URL('./style.css', import.meta.url), 'utf8'), /\.hero:before\{content:none\}/);
+});
+
 test('기존 Q1~Q4 단가·무게·적응·수입 이미지를 순서대로 사용한다', () => {
   for (const image of ['qa-1-unit-price.png','qa-2-weight.png','qa-3-adaptation.png','qa-4-income.png']) {
     assert.match(html, new RegExp(image));
