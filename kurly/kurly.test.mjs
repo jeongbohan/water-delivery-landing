@@ -38,6 +38,12 @@ test('기존 세로형 상세페이지의 핵심 정보 흐름을 보존한다',
   }
 });
 
+test('Only 구간은 기존 랜딩 문구를 그대로 사용한다', () => {
+  for (const copy of ['오직 컬리','가장 가벼운 택배','여자도 가능한 고수익 배송','50대 기사 만족도 1위']) {
+    assert.match(html, new RegExp(copy));
+  }
+});
+
 test('GA4 전환 퍼널 이벤트를 포함한다', () => {
   for (const eventName of ['landing_view','landing_click','proof_view','form_start','generate_lead']) {
     assert.match(app, new RegExp(eventName));
