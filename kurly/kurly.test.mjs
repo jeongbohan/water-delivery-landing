@@ -90,6 +90,12 @@ test('FAQ 대신 최신 2,588명 신뢰 섹션을 표시한다', () => {
   assert.equal(html.includes('class="section faq"'), false);
 });
 
+test('신뢰 섹션은 보유 단체 사진을 배경으로 쓰고 현황판 하단 여백을 자른다', () => {
+  const css = readFileSync(new URL('./style.css', import.meta.url), 'utf8');
+  assert.match(css, /\.trust-head\{[^}]*scholarship-group\.jpg/);
+  assert.match(css, /\.trust-section>img\{[^}]*aspect-ratio:1\.04[^}]*object-fit:cover[^}]*object-position:center top/);
+});
+
 test('Only 구간은 기존 랜딩 문구를 그대로 사용한다', () => {
   for (const copy of ['오직 컬리','가장 가벼운 택배','여자도 가능한 고수익 배송','50대 기사 만족도 1위']) {
     assert.match(html, new RegExp(copy));
