@@ -20,16 +20,34 @@ test('컬리 전용 추적키와 A\/B 변수를 보존한다', () => {
   assert.match(app, /proofSlotLate/);
 });
 
+test('회사 로고를 사용하고 실험안 표시는 노출하지 않는다', () => {
+  assert.match(html, /\.\.\/img\/deliveryin-logo\.png/);
+  assert.equal(html.includes('variant-chip'), false);
+  assert.equal(html.includes('LP A안'), false);
+  assert.equal(app.includes('variantChip'), false);
+});
+
 test('광고 표면 금지어와 보장 표현을 사용하지 않는다', () => {
   for (const forbidden of ['면접','합격','심사','선발','지원서','무조건','누구나','수익 보장','평균 급여']) {
     assert.equal(html.includes(forbidden), false, `금지 표현 발견: ${forbidden}`);
   }
 });
 
-test('컬리 차량 기준과 사례 한계를 명시한다', () => {
-  assert.match(html, /냉동탑차/);
+test('컬리 지급 사례의 한계를 명시한다', () => {
   assert.match(html, /2026년 5월 지급 사례 6건/);
   assert.match(html, /평균이나 보장을 뜻하지 않아요/);
+});
+
+test('폼에서 냉동탑차 준비 질문을 제거하고 생수 랜딩 동의 흐름을 사용한다', () => {
+  assert.equal(html.includes('name="vehicle_status"'), false);
+  assert.equal(html.includes('냉동탑차 준비 상태'), false);
+  for (const copy of ['지원을 위한 정보 수집에 동의해주세요.','전체 동의에는 필수 및 선택목적','선택동의를 거부하셔도 지원은 가능합니다.','전체 동의','[필수]','개인정보 수집 및 이용 동의','[선택]','광고성 정보 및 신규 모집 소식 수신 동의','수신 동의 혜택','가이드북과 인터넷 강의 자료']) {
+    assert.equal(html.includes(copy), true, `동의 문구 누락: ${copy}`);
+  }
+  for (const id of ['allConsent','privacyConsent','marketingConsent']) {
+    assert.match(html, new RegExp(`id="${id}"`));
+    assert.match(app, new RegExp(id));
+  }
 });
 
 test('지급 자료 바로 아래에 고해상도 소득 안내를 두고 차량 경고 문구를 사용한다', () => {

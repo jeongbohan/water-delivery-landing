@@ -12,7 +12,6 @@
 
   const proof = document.querySelector('#proofTemplate').content.cloneNode(true);
   document.querySelector(variant === 'b' ? '#proofSlotEarly' : '#proofSlotLate').appendChild(proof);
-  document.querySelector('#variantChip').textContent = `LP ${variant.toUpperCase()}안`;
   document.documentElement.dataset.variant = variant;
 
   const tracking = {
@@ -73,6 +72,21 @@
     phone.value = digits.length > 7 ? `${digits.slice(0,3)}-${digits.slice(3,7)}-${digits.slice(7)}` : digits.length > 3 ? `${digits.slice(0,3)}-${digits.slice(3)}` : digits;
   });
   age.addEventListener('input', () => { age.value = age.value.replace(/\D/g, '').slice(0, 3); });
+
+  const allConsent = document.querySelector('#allConsent');
+  const privacyConsent = document.querySelector('#privacyConsent');
+  const marketingConsent = document.querySelector('#marketingConsent');
+  const syncAllConsent = () => {
+    allConsent.checked = privacyConsent.checked && marketingConsent.checked;
+    allConsent.indeterminate = privacyConsent.checked !== marketingConsent.checked;
+  };
+  allConsent.addEventListener('change', () => {
+    privacyConsent.checked = allConsent.checked;
+    marketingConsent.checked = allConsent.checked;
+    allConsent.indeterminate = false;
+  });
+  privacyConsent.addEventListener('change', syncAllConsent);
+  marketingConsent.addEventListener('change', syncAllConsent);
 
   const privacyToggle = document.querySelector('#privacyToggle');
   privacyToggle.addEventListener('click', () => {

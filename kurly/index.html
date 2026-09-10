@@ -17,8 +17,7 @@
   <div class="draft-banner" id="draftBanner">컬리 전용 수신 경로 연결 전 · QA 잠금</div>
   <main class="page">
     <nav class="topbar" aria-label="브랜드">
-      <a class="brand" href="#top" aria-label="배송인그룹 홈"><span class="brand-mark">D</span><span>배송인그룹</span></a>
-      <span class="variant-chip" id="variantChip">실험안 확인 중</span>
+      <a class="brand" href="#top" aria-label="배송인그룹 홈"><img src="../img/deliveryin-logo.png" alt="배송인그룹"></a>
     </nav>
 
     <header class="hero" id="top">
@@ -104,8 +103,16 @@
         <div class="form-row"><label>이름 <span>*</span><input name="name" autocomplete="name" maxlength="20" required placeholder="이름"></label><label>연락처 <span>*</span><input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="numeric" maxlength="13" required placeholder="010-1234-5678"></label></div>
         <div class="form-row"><label>나이 <span>*</span><input id="age" name="age" inputmode="numeric" maxlength="3" required placeholder="예: 45"></label><label>거주지역 <span>*</span><input name="region" autocomplete="address-level2" maxlength="60" required placeholder="예: 서울 송파구"></label></div>
         <fieldset><legend>운전면허 종류 <span>*</span></legend><div class="choice-grid"><label class="choice"><input type="radio" name="license" value="1종 보통" required><span>1종 보통</span></label><label class="choice"><input type="radio" name="license" value="2종 보통"><span>2종 보통</span></label></div></fieldset>
-        <fieldset><legend>냉동탑차 준비 상태</legend><div class="choice-grid three"><label class="choice"><input type="radio" name="vehicle_status" value="보유"><span>보유</span></label><label class="choice"><input type="radio" name="vehicle_status" value="준비중"><span>준비 중</span></label><label class="choice"><input type="radio" name="vehicle_status" value="상담필요"><span>상담 필요</span></label></div></fieldset>
-        <div class="consent-block"><label class="check"><input type="checkbox" name="privacy_consent" value="동의" required><span><b>[필수]</b> 개인정보 수집 및 이용 동의</span></label><button class="text-button" id="privacyToggle" type="button" aria-expanded="false">내용보기</button><div class="privacy-detail" id="privacyDetail">수집 항목: 이름, 연락처, 나이, 거주지역, 운전면허, 차량 준비 상태<br>이용 목적: 컬리 배송 조건 확인 요청 접수 및 상담 안내<br>보유 기간: 수집 목적 달성 시까지. 관련 법령에 따라 보존이 필요한 경우 해당 기간 동안 보관합니다.</div><label class="check optional"><input type="checkbox" name="marketing_consent" value="동의"><span>[선택] 광고성 정보 및 신규 모집 소식 수신 동의</span></label></div>
+        <section class="privacy-section">
+          <p class="interview-note">제출 완료 시, 업무 적합성 진단을 위한 유선상 인터뷰가 순차적으로 진행됩니다.</p>
+          <h3>지원을 위한 정보 수집에 동의해주세요.</h3>
+          <p class="consent-guide">전체 동의에는 필수 및 선택목적(광고성 정보 수신 포함)이 포함됩니다. 선택동의를 거부하셔도 지원은 가능합니다.</p>
+          <div class="consent consent-all"><label class="consent-check"><input type="checkbox" id="allConsent"><span class="consent-copy">전체 동의</span></label></div>
+          <div class="consent"><label class="consent-check"><input type="checkbox" id="privacyConsent" name="privacy_consent" value="동의" required><span class="consent-copy"><span class="req">[필수]</span> 개인정보 수집 및 이용 동의</span></label><button class="detail-toggle" id="privacyToggle" type="button" aria-expanded="false">내용보기</button></div>
+          <div class="privacy-detail" id="privacyDetail">수집 항목: 이름, 연락처, 거주지역, 나이, 운전면허 종류<br>이용 목적: 배송 업무 지원 접수, 모집 조건 확인 및 상담 안내<br>보유 기간: 수집 목적 달성 시까지(관련 법령에 따라 보존이 필요한 경우 해당 기간)</div>
+          <div class="consent"><label class="consent-check"><input type="checkbox" id="marketingConsent" name="marketing_consent" value="동의"><span class="consent-copy"><span>[선택]</span> 광고성 정보 및 신규 모집 소식 수신 동의</span></label></div>
+          <p class="consent-benefit"><strong>수신 동의 혜택</strong><br>배송 계약 전 사기 피해를 예방하고 현장 시행착오를 줄이는 데 참고할 수 있는 가이드북과 인터넷 강의 자료를 보내드립니다.</p>
+        </section>
         <div class="hp" aria-hidden="true"><label>웹사이트<input name="website" tabindex="-1" autocomplete="off"></label></div>
         <input type="hidden" name="content_id" id="contentId"><input type="hidden" name="source_code" id="sourceCode"><input type="hidden" name="utm_source" id="utmSource"><input type="hidden" name="utm_medium" id="utmMedium"><input type="hidden" name="utm_campaign" id="utmCampaign"><input type="hidden" name="utm_content" id="utmContent"><input type="hidden" name="campaign_id" id="campaignId"><input type="hidden" name="adset_id" id="adsetId"><input type="hidden" name="ad_id" id="adId"><input type="hidden" name="lp_variant" id="lpVariant"><input type="hidden" name="funnel_type" value="LP"><input type="hidden" name="response_mode" value="iframe"><input type="hidden" name="request_id" id="requestId">
         <button class="submit" id="submitButton" type="submit" disabled>컬리 수신 경로 연결 후 열립니다</button><div class="notice" id="notice" role="alert" aria-live="polite"></div>
