@@ -1,5 +1,9 @@
 (() => {
   const qs = new URLSearchParams(location.search);
+  const fragment = new URLSearchParams(location.hash.slice(1));
+  const qaToken = fragment.get('qa_token') || '';
+  const qaMode = qs.get('qa') === '1' && qaToken.length >= 32;
+  if (qaToken) history.replaceState(null, '', location.pathname + location.search);
   const allowedVariants = new Set(['a', 'b']);
   const storedVariant = localStorage.getItem('deliveryin_kurly_lp_variant');
   const requestedVariant = String(qs.get('variant') || '').toLowerCase();
@@ -15,8 +19,8 @@
   document.documentElement.dataset.variant = variant;
 
   const tracking = {
-    content_id: qs.get('content_id') || 'LP-KURLY-PROOF-01',
-    source_code: qs.get('source_code') || `kurly-direct-2609-${variant}`,
+    content_id: qs.get('content_id') || 'AD-20260916-002-801',
+    source_code: qs.get('source_code') || `kurly-k3-2609-801-${variant}`,
     utm_source: qs.get('utm_source') || 'meta',
     utm_medium: qs.get('utm_medium') || 'paid_social',
     utm_campaign: qs.get('utm_campaign') || 'kurly_directform_202609',
@@ -24,6 +28,9 @@
     campaign_id: qs.get('campaign_id') || '',
     adset_id: qs.get('adset_id') || '',
     ad_id: qs.get('ad_id') || '',
+    campaign_name: qs.get('campaign_name') || '',
+    adset_name: qs.get('adset_name') || '',
+    ad_name: qs.get('ad_name') || '',
     lp_variant: variant
   };
   Object.entries(tracking).forEach(([key, value]) => {
@@ -89,6 +96,9 @@
   const button = document.querySelector('#submitButton');
   const notice = document.querySelector('#notice');
   const endpoint = document.body.dataset.submitEndpoint.trim();
+  const customerOpen = document.body.dataset.customerSubmitEnabled === 'true';
+  const canSubmit = Boolean(endpoint && (customerOpen || qaMode));
+  const frame = document.querySelector('#submitResultFrame');
   const phone = document.querySelector('#phone');
   const age = document.querySelector('#age');
   let formStarted = false;
@@ -127,7 +137,7 @@
   });
 
   const requestId = document.querySelector('#requestId');
-  if (endpoint) {
+  if (canSubmit) {
     button.disabled = false;
     button.textContent = '내 조건 확인 요청하기';
     document.querySelector('#draftBanner').hidden = true;
@@ -142,8 +152,10 @@
   let pendingRequestId = '';
   let submitTimeout = 0;
   window.addEventListener('message', event => {
+    if (!/^https:\/\/[a-z0-9-]+-script\.googleusercontent\.com$/.test(event.origin) && event.origin !== 'https://script.google.com' && event.origin !== 'https://script.googleusercontent.com') return;
     const data = event.data || {};
     if (data.source !== 'deliveryin-kurly-direct-form' || data.request_id !== pendingRequestId) return;
+    if (event.origin === 'https://script.google.com' && event.source !== frame.contentWindow) return;
     clearTimeout(submitTimeout);
     pendingRequestId = '';
     if (!data.ok) {
@@ -152,25 +164,36 @@
       button.textContent = '내 조건 확인 요청하기';
       return;
     }
-    gtag('event', 'generate_lead', {
+    if (data.is_test !== qaMode || !data.lead_id) {
+      showNotice('접수 확인값이 일치하지 않아요. 잠시 후 다시 시도해주세요.');
+      button.disabled = false;
+      return;
+    }
+    if (!qaMode && data.kind !== 'duplicate' && !data.performance_excluded && data.conversion_eligible) gtag('event', 'generate_lead', {
       content_id: tracking.content_id,
       lp_variant: variant,
       submission_kind: data.kind || 'new'
     });
-    showNotice('요청이 접수됐어요. 담당자가 순차적으로 안내드릴게요.', true);
+    showNotice(qaMode ? '검수 제출을 기록했어요. 성과 집계에서 제외됩니다.' : '요청이 접수됐어요. 담당자가 순차적으로 안내드릴게요.', true);
     form.reset();
     button.textContent = '접수 완료';
   });
 
   form.addEventListener('submit', event => {
     event.preventDefault();
-    if (!endpoint) {
+    if (!canSubmit) {
       showNotice('컬리 전용 수신 경로를 연결하는 중이에요. 아직 실제 정보는 제출되지 않습니다.');
       return;
     }
     if (!form.reportValidity()) return;
     pendingRequestId = `KURLY-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
     requestId.value = pendingRequestId;
+    let testField = form.querySelector('input[name="is_test"]');
+    if (!testField) { testField = document.createElement('input'); testField.type = 'hidden'; testField.name = 'is_test'; form.append(testField); }
+    testField.value = qaMode ? 'true' : 'false';
+    let tokenField = form.querySelector('input[name="qa_token"]');
+    if (!tokenField) { tokenField = document.createElement('input'); tokenField.type = 'hidden'; tokenField.name = 'qa_token'; form.append(tokenField); }
+    tokenField.value = qaToken;
     button.disabled = true;
     button.textContent = '접수 중…';
     form.target = 'submitResultFrame';

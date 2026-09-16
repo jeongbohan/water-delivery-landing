@@ -12,13 +12,13 @@
 
 | 필드 | 기본값 |
 |---|---|
-| `content_id` | `LP-KURLY-PROOF-01` |
-| `source_code` | `kurly-direct-2609-a` 또는 `kurly-direct-2609-b` |
+| `content_id` | `AD-20260916-002-801` |
+| `source_code` | `kurly-k3-2609-801-a` 또는 `kurly-k3-2609-801-b` |
 | `utm_campaign` | `kurly_directform_202609` |
 | `lp_variant` | `a` 또는 `b` |
 | `funnel_type` | `LP` |
 
-Meta의 `campaign_id`, `adset_id`, `ad_id`, UTM 값은 URL 쿼리에서 hidden field로 보존한다.
+Meta의 `campaign_id`, `adset_id`, `ad_id`, `campaign_name`, `adset_name`, `ad_name`, UTM 값은 URL 쿼리에서 hidden field로 보존한다. 수신 원장의 `final_content_id`는 `content_id`와 동일하게 기록한다.
 
 ## 잠금 해제 조건
 

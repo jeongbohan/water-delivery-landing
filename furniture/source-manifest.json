@@ -1,0 +1,46 @@
+{
+  "content_id": "AD-20260916-002-701",
+  "source_code": ["furniture-k3-2609-701-a"],
+  "hook_type": "수익",
+  "experiment_variable": "미집행. 단일 디자인안. 고객 제출 잠금.",
+  "reviewed_at": "2026-09-11",
+  "source_sheet": {
+    "spreadsheet_id": "1mk8IoGPomgU-eMMjeh3GSXX3CWyTexaENbDP9U18buo",
+    "title": "유형별 후기 모음",
+    "sheet": "유튜브(가구)",
+    "sheet_id": 1039633240,
+    "read_range": "A1:H120"
+  },
+  "assets": [
+    {"file":"img/proof-payout-980.png","asset_tier":"실제-인증","origin":"기존 구글사이트 가구 랜딩 수수료 인증 후기"},
+    {"file":"img/proof-payout-825.png","asset_tier":"실제-인증","origin":"기존 구글사이트 가구 랜딩 수수료 인증 후기"},
+    {"file":"img/proof-payout-836.png","asset_tier":"실제-인증","origin":"기존 구글사이트 가구 랜딩 수수료 인증 후기"},
+    {"file":"img/story-beginner.png","asset_tier":"실제-인증","origin":"content/blog/assets/thumbnails/nv-furniture.png"},
+    {"file":"img/story-longterm.png","asset_tier":"실제-인증","origin":"content/blog/assets/thumbnails/nv-noretire.png"},
+    {"file":"img/video-yoon.jpg","asset_tier":"실제-인증","origin":"https://i.ytimg.com/vi/dDZ77WXSGmo/maxresdefault.jpg","video":"https://youtu.be/dDZ77WXSGmo"},
+    {"file":"img/video-pair.jpg","asset_tier":"실제-인증","origin":"https://i.ytimg.com/vi/K2ADGJd9KWg/maxresdefault.jpg","video":"https://youtu.be/K2ADGJd9KWg"},
+    {"file":"img/video-hong.jpg","asset_tier":"실제-인증","origin":"https://i.ytimg.com/vi/LfOXRdNZsIw/maxresdefault.jpg","video":"https://youtu.be/LfOXRdNZsIw"},
+    {"file":"img/video-couple.jpg","asset_tier":"실제-인증","origin":"https://i.ytimg.com/vi/sPSNL5WiuAI/maxresdefault.jpg","video":"https://youtu.be/sPSNL5WiuAI"},
+    {"file":"img/video-lee.jpg","asset_tier":"실제-인증","origin":"https://i.ytimg.com/vi/z_X9ZyCNK30/maxresdefault.jpg","video":"https://youtu.be/z_X9ZyCNK30"},
+    {"file":"img/video-income-double.jpg","asset_tier":"실제-인증","origin":"https://i.ytimg.com/vi/SuMYmQGTkcc/maxresdefault.jpg","video":"https://youtu.be/SuMYmQGTkcc"},
+    {"file":"img/video-income-real.jpg","asset_tier":"실제-인증","origin":"https://i.ytimg.com/vi/i7mgNsDA1Qs/maxresdefault.jpg","video":"https://youtu.be/i7mgNsDA1Qs"},
+    {"file":"img/video-early-finish.jpg","asset_tier":"실제-인증","origin":"https://i.ytimg.com/vi/I2dseE5-tws/maxresdefault.jpg","video":"https://youtu.be/I2dseE5-tws"},
+    {"file":"img/logo-hanssem-crop.png","origin":"https://company.hanssem.com/about/ci","kind":"공식 한샘 CI"},
+    {"file":"img/logo-ohouse-crop.png","origin":"https://asset.ohousecdn.com/static/AssetOpenGraphOhouseHorizontal/open-graph-ohouse-horizontal.png","kind":"공식 오늘의집 로고"},
+    {"file":"img/logo-ikea.svg","origin":"https://www.ikea.com/global/assets/logos/brand/ikea.svg","kind":"공식 IKEA 로고"}
+  ],
+  "copy_evidence": [
+    {"claim":"1톤 트럭 배송 중 가구가 매출과 실수령액이 가장 높음","asset_tier":"통계-집계","origin":"정보한 팀장 2026-09-11 확정","scope":"배송인그룹 운영 데이터 기준 비교"},
+    {"claim":"초반 월 총매출 400~500만원대, 6개월 이상 평균 700~800만원대","asset_tier":"통계-집계","origin":"정보한 팀장 2026-09-11 확정","scope":"지역·배정·근무일수·숙련도에 따라 달라질 수 있음"},
+    {"claim":"숙련으로 조립시간이 줄고 처리량과 고단가 품목 배정 기회가 증가하는 구조","asset_tier":"실제-인증","origin":"정보한 팀장 2026-09-11 업무 구조 확정"},
+    {"claim":"이케아·한샘 계열 교육비 1일 최대 38,000원","asset_tier":"실제-인증","origin":"사용자 제공 센터 현황 이미지 2026-09-11","scope":"센터와 모집 시점에 따라 달라질 수 있음"},
+    {"claim":"오늘의집 신규 매니저 2주 교육 및 2주 배송 정착 정책","asset_tier":"실제-인증","origin":"C:/Users/user/AppData/Local/Temp/codex-clipboard-fcf0b202-bb27-4beb-8fe3-f256ae3553c7.png","evidence_date":"2026-09-11"},
+    {"claim":"지금까지 함께한 기사 2,593명","asset_tier":"통계-집계","origin":"정보한 팀장 2026-09-11 현재 기준 확정"}
+  ],
+  "form_contract": {
+    "visible_fields": ["name", "phone", "region", "age", "license", "privacy_consent", "marketing_consent"],
+    "reference": "생수 랜딩 자체폼과 동일",
+    "extra_options": false,
+    "customer_submit_enabled": false
+  }
+}

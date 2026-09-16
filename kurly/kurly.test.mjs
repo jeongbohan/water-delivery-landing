@@ -5,17 +5,20 @@ import {readFileSync} from 'node:fs';
 const html = readFileSync(new URL('./index.html', import.meta.url), 'utf8');
 const app = readFileSync(new URL('./app.js', import.meta.url), 'utf8');
 
-test('운영 수신기가 연결되기 전 제출을 잠근다', () => {
-  assert.match(html, /data-submit-endpoint=""/);
+test('운영 수신기를 연결하되 고객 제출은 서버와 랜딩에서 잠근다', () => {
+  assert.match(html, /data-submit-endpoint="https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec"/);
+  assert.match(html, /data-customer-submit-enabled="false"/);
   assert.match(html, /id="submitButton"[^>]*disabled/);
+  assert.match(app, /qa_token/);
+  assert.match(app, /data\.is_test !== qaMode/);
 });
 
 test('컬리 전용 추적키와 A\/B 변수를 보존한다', () => {
-  for (const name of ['content_id','source_code','utm_source','utm_medium','utm_campaign','utm_content','campaign_id','adset_id','ad_id','lp_variant','funnel_type','request_id']) {
+  for (const name of ['content_id','source_code','utm_source','utm_medium','utm_campaign','utm_content','campaign_id','adset_id','ad_id','campaign_name','adset_name','ad_name','lp_variant','funnel_type','request_id']) {
     assert.match(html, new RegExp(`name="${name}"`));
   }
-  assert.match(app, /kurly-direct-2609-/);
-  assert.match(app, /LP-KURLY-PROOF-01/);
+  assert.match(app, /kurly-k3-2609-801-/);
+  assert.match(app, /AD-20260916-002-801/);
   assert.match(app, /proofSlotEarly/);
   assert.match(app, /proofSlotLate/);
 });
