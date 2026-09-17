@@ -13,9 +13,9 @@
 | 필드 | 기본값 |
 |---|---|
 | `content_id` | `AD-20260916-002-801` |
-| `source_code` | `kurly-k3-2609-801-a` 또는 `kurly-k3-2609-801-b` |
+| `source_code` | `kurly-k3-2609-801-a` |
 | `utm_campaign` | `kurly_directform_202609` |
-| `lp_variant` | `a` 또는 `b` |
+| `lp_variant` | `a` |
 | `funnel_type` | `LP` |
 
 Meta의 `campaign_id`, `adset_id`, `ad_id`, `campaign_name`, `adset_name`, `ad_name`, UTM 값은 URL 쿼리에서 hidden field로 보존한다. 수신 원장의 `final_content_id`는 `content_id`와 동일하게 기록한다.

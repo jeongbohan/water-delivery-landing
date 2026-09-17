@@ -4,15 +4,8 @@
   const qaToken = fragment.get('qa_token') || '';
   const qaMode = qs.get('qa') === '1' && qaToken.length >= 32;
   if (qaToken) history.replaceState(null, '', location.pathname + location.search);
-  const allowedVariants = new Set(['a', 'b']);
-  const storedVariant = localStorage.getItem('deliveryin_kurly_lp_variant');
-  const requestedVariant = String(qs.get('variant') || '').toLowerCase();
-  const variant = allowedVariants.has(requestedVariant)
-    ? requestedVariant
-    : allowedVariants.has(storedVariant)
-      ? storedVariant
-      : Math.random() < .5 ? 'a' : 'b';
-  localStorage.setItem('deliveryin_kurly_lp_variant', variant);
+  // 801은 저예산 단일 경로 검증이다. 랜딩 변수까지 나뉘지 않도록 A안으로 고정한다.
+  const variant = 'a';
 
   const proof = document.querySelector('#proofTemplate').content.cloneNode(true);
   document.querySelector(variant === 'b' ? '#proofSlotEarly' : '#proofSlotLate').appendChild(proof);
