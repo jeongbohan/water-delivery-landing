@@ -113,6 +113,15 @@ test('GA4 전환 퍼널 이벤트를 포함한다', () => {
   }
 });
 
+test('유효 신규 제출만 Meta Lead로 보내고 lead_id를 event_id로 사용한다', () => {
+  assert.match(app, /data\.kind !== 'duplicate'/);
+  assert.match(app, /!data\.performance_excluded/);
+  assert.match(app, /data\.conversion_eligible/);
+  assert.match(app, /deliveryinMeta\.trackLead/);
+  assert.match(app, /leadId: data\.lead_id/);
+  assert.match(app, /event_id: data\.lead_id/);
+});
+
 test('영상은 유튜브로 이탈하지 않고 페이지 내부 팝업에서 재생한다', () => {
   assert.equal(html.includes('href="https://www.youtube.com'), false);
   assert.equal(html.includes('target="_blank"'), false);

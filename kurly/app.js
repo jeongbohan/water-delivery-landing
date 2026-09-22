@@ -162,11 +162,24 @@
       button.disabled = false;
       return;
     }
-    if (!qaMode && data.kind !== 'duplicate' && !data.performance_excluded && data.conversion_eligible) gtag('event', 'generate_lead', {
-      content_id: tracking.content_id,
-      lp_variant: variant,
-      submission_kind: data.kind || 'new'
-    });
+    if (!qaMode && data.kind !== 'duplicate' && !data.performance_excluded && data.conversion_eligible) {
+      gtag('event', 'generate_lead', {
+        content_id: tracking.content_id,
+        lp_variant: variant,
+        submission_kind: data.kind || 'new',
+        event_id: data.lead_id
+      });
+      if (window.deliveryinMeta) window.deliveryinMeta.trackLead({
+        leadId: data.lead_id,
+        isTest: data.is_test,
+        kind: data.kind,
+        performanceExcluded: data.performance_excluded,
+        conversionEligible: data.conversion_eligible,
+        contentId: tracking.content_id,
+        sourceCode: tracking.source_code,
+        variant
+      });
+    }
     showNotice(qaMode ? '검수 제출을 기록했어요. 성과 집계에서 제외됩니다.' : '요청이 접수됐어요. 담당자가 순차적으로 안내드릴게요.', true);
     form.reset();
     button.textContent = '접수 완료';
