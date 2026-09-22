@@ -31,6 +31,7 @@
     document.head.appendChild(loader);
   }
   window.fbq('init', pixelId);
+  window.fbq('track', 'PageView');
 
   function storageGet(key) {
     try { return localStorage.getItem(key); } catch (_) { return null; }

@@ -27,12 +27,18 @@ test('유효 신규 제출만 Lead를 eventID=lead_id로 한 번 전송한다', 
   const {context, stored} = load();
   const input = {leadId:'K-260922-ABC12345',kind:'new',isTest:false,performanceExcluded:false,conversionEligible:true,contentId:'AD-20260916-002-801',sourceCode:'kurly-k3-2609-801-a',variant:'a'};
   assert.deepEqual({...context.window.deliveryinMeta.trackLead(input)}, {sent:true,reason:'sent'});
-  const track = context.window.fbq.queue.find(args => args[0] === 'track');
+  const track = context.window.fbq.queue.find(args => args[0] === 'track' && args[1] === 'Lead');
   assert.equal(track[1], 'Lead');
   assert.equal(track[3].eventID, input.leadId);
   assert.equal(stored.get(`meta_lead_event_${input.leadId}`), '1');
   assert.deepEqual({...context.window.deliveryinMeta.trackLead(input)}, {sent:false,reason:'duplicate_event'});
-  assert.equal(context.window.fbq.queue.filter(args => args[0] === 'track').length, 1);
+  assert.equal(context.window.fbq.queue.filter(args => args[0] === 'track' && args[1] === 'Lead').length, 1);
+});
+
+test('일반 운영 페이지는 Pixel 초기화 후 PageView를 한 번 전송한다', () => {
+  const {context} = load();
+  assert.equal(context.window.fbq.queue.filter(args => args[0] === 'init' && args[1] === '284709942981308').length, 1);
+  assert.equal(context.window.fbq.queue.filter(args => args[0] === 'track' && args[1] === 'PageView').length, 1);
 });
 
 test('QA 모드에서는 Pixel을 초기화하지 않고 Lead도 보내지 않는다', () => {
@@ -52,14 +58,14 @@ test('중복·성과제외·전환불가 응답은 Lead를 보내지 않는다',
   ]) {
     const {context} = load();
     assert.equal(context.window.deliveryinMeta.trackLead(input).sent, false);
-    assert.equal(context.window.fbq.queue.filter(args => args[0] === 'track').length, 0);
+    assert.equal(context.window.fbq.queue.filter(args => args[0] === 'track' && args[1] === 'Lead').length, 0);
   }
 });
 
 test('세 운영 랜딩이 동일 Pixel 모듈을 사용한다', () => {
   for (const path of ['./kurly/index.html','./furniture/index.html','./direct/index.html']) {
     const html = fs.readFileSync(new URL(path, import.meta.url), 'utf8');
-    assert.match(html, /meta-pixel\.js\?v=20260922-1/);
+    assert.match(html, /meta-pixel\.js\?v=20260922-2/);
     assert.match(html, /data-pixel-id="284709942981308"/);
   }
 });
