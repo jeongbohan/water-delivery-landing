@@ -15,7 +15,7 @@ test('신뢰한 Apps Script 응답과 일치하는 요청만 처리한다', () =
   assert.match(html, /googleusercontent\.com/);
   assert.match(html, /event\.origin==='null'/);
   assert.match(html, /data\.request_id!==pendingRequestId/);
-  assert.match(html, /event\.source!==frame\.contentWindow\|\|!trustedOrigin/);
+  assert.match(html, /if\(!trustedOrigin\)return/);
   assert.match(html, /data\.is_test!==qaMode\|\|!data\.lead_id/);
 });
 

@@ -146,7 +146,7 @@
   let submitTimeout = 0;
   window.addEventListener('message', event => {
     const trustedOrigin = event.origin === 'null' || /^https:\/\/[a-z0-9-]+-script\.googleusercontent\.com$/.test(event.origin) || event.origin === 'https://script.google.com' || event.origin === 'https://script.googleusercontent.com';
-    if (event.source !== frame.contentWindow || !trustedOrigin) return;
+    if (!trustedOrigin) return;
     const data = event.data || {};
     if (data.source !== 'deliveryin-kurly-direct-form' || data.request_id !== pendingRequestId) return;
     clearTimeout(submitTimeout);

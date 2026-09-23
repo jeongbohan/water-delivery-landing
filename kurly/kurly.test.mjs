@@ -122,9 +122,11 @@ test('유효 신규 제출만 Meta Lead로 보내고 lead_id를 event_id로 사�
   assert.match(app, /event_id: data\.lead_id/);
 });
 
-test('Apps Script의 opaque-origin 응답은 제출 iframe에서 온 경우에만 처리한다', () => {
+test('Apps Script의 중첩 sandbox 응답은 origin·source·nonce가 일치할 때만 처리한다', () => {
   assert.match(app, /event\.origin === 'null'/);
-  assert.match(app, /event\.source !== frame\.contentWindow \|\| !trustedOrigin/);
+  assert.match(app, /if \(!trustedOrigin\) return/);
+  assert.match(app, /data\.source !== 'deliveryin-kurly-direct-form'/);
+  assert.match(app, /data\.request_id !== pendingRequestId/);
   assert.equal(app.includes("event.origin === 'https://script.google.com' && event.source !== frame.contentWindow"), false);
 });
 
