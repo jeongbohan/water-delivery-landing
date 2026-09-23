@@ -122,6 +122,12 @@ test('유효 신규 제출만 Meta Lead로 보내고 lead_id를 event_id로 사�
   assert.match(app, /event_id: data\.lead_id/);
 });
 
+test('Apps Script의 opaque-origin 응답은 제출 iframe에서 온 경우에만 처리한다', () => {
+  assert.match(app, /event\.origin === 'null'/);
+  assert.match(app, /event\.source !== frame\.contentWindow \|\| !trustedOrigin/);
+  assert.equal(app.includes("event.origin === 'https://script.google.com' && event.source !== frame.contentWindow"), false);
+});
+
 test('영상은 유튜브로 이탈하지 않고 페이지 내부 팝업에서 재생한다', () => {
   assert.equal(html.includes('href="https://www.youtube.com'), false);
   assert.equal(html.includes('target="_blank"'), false);

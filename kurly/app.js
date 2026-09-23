@@ -145,10 +145,10 @@
   let pendingRequestId = '';
   let submitTimeout = 0;
   window.addEventListener('message', event => {
-    if (!/^https:\/\/[a-z0-9-]+-script\.googleusercontent\.com$/.test(event.origin) && event.origin !== 'https://script.google.com' && event.origin !== 'https://script.googleusercontent.com') return;
+    const trustedOrigin = event.origin === 'null' || /^https:\/\/[a-z0-9-]+-script\.googleusercontent\.com$/.test(event.origin) || event.origin === 'https://script.google.com' || event.origin === 'https://script.googleusercontent.com';
+    if (event.source !== frame.contentWindow || !trustedOrigin) return;
     const data = event.data || {};
     if (data.source !== 'deliveryin-kurly-direct-form' || data.request_id !== pendingRequestId) return;
-    if (event.origin === 'https://script.google.com' && event.source !== frame.contentWindow) return;
     clearTimeout(submitTimeout);
     pendingRequestId = '';
     if (!data.ok) {

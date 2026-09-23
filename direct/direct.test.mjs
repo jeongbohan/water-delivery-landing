@@ -13,8 +13,9 @@ test('생수 폼은 인증된 QA 토큰을 URL에서 제거하고 서버에만 �
 
 test('신뢰한 Apps Script 응답과 일치하는 요청만 처리한다', () => {
   assert.match(html, /googleusercontent\.com/);
+  assert.match(html, /event\.origin==='null'/);
   assert.match(html, /data\.request_id!==pendingRequestId/);
-  assert.match(html, /event\.source!==frame\.contentWindow/);
+  assert.match(html, /event\.source!==frame\.contentWindow\|\|!trustedOrigin/);
   assert.match(html, /data\.is_test!==qaMode\|\|!data\.lead_id/);
 });
 
